@@ -2,51 +2,35 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
     <title>Drag n Drop</title>
-    <style>
-        div.postit{
-            border: 1px solid gold;
-            background-color: yellow;
-            color: orange;
-            width: 150px;
-            height: 150px;
-            position: absolute;
-            z-index:1;
-            left: 800px;
-            top: 300px;
-        }
-
-        #todoDiv{
-            width: 500px;
-            height: 500px;
-            background-color:rgb(36, 116, 36);
-            border: 1px solid white;
-        }
-
-        #leftCol{
-            float: left;
-        }
-
-        #rightCol{
-            border: 1px solid black;
-            height:100%;
-            float: left;
-            width: 70%;
-        }
-
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <div id="inputDiv">
+        <label for="todo">Todo: </label>
+        <input type="text" name="todo" id="todoInput">
+        <button id="btnTodo">Add Available Todo</button>
+    </div>
     <div id="leftCol">
         <div id="todoDiv">
             <ul></ul>
         </div>
     </div>
     <div id="rightCol">
-
+        <div draggable="true" class="postit" style="display:none">
+            <div class="header"><a class="close-thik" href="#"></a></div>
+            <div class="body">
+                Text content
+            </div>
+        </div>
     </div>
 
-
-    <!-- <div draggable="true" id="draggableDiv" class="postit">Buy milk</div> -->
     <script src="scripts/drag_n_drop.js"></script>
+    <script>
+        document.getElementById('btnTodo').addEventListener('click', function(){
+            const todoInput = document.getElementById('todoInput');
+            const todoText = todoInput.value;
+            createPostit(todoText);
+        })
+    </script>
 </body>
 </html>

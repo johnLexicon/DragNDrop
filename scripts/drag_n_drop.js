@@ -2,7 +2,7 @@
 function onDragStart(ev){
     console.log("onDragStart");
     ev.dataTransfer.effectAllowed = 'copy';
-    ev.dataTransfer.setData("Text", div.textContent);
+    ev.dataTransfer.setData("Text", ev.target.textContent);
 }
 
 function onDragLeave(ev){
@@ -45,6 +45,7 @@ function onDragOver(ev){
     ev.dataTransfer.dropEffect = 'copy';
 }
 
+//TODO: make sure only the text content from the body is copied
 function appendTodo(ev){
     if(ev.stopPropagation)
         ev.stopPropagation();
@@ -56,14 +57,11 @@ function appendTodo(ev){
 }
 
 function createPostit(textContent) {
-    //<div draggable="true" id="draggableDiv" class="postit">Buy milk</div>
-    let postitDiv = document.createElement('div');
-    postitDiv.appendChild(document.createTextNode(textContent));
-    postitDiv.classList.add("postit");
-    postitDiv.id = "draggableDiv";
-    postitDiv.setAttribute("draggable", true);
+    let template = document.querySelector('.postit:first-of-type');
+    let postitDiv = template.cloneNode(true);
+    postitDiv.querySelector('.body').textContent = textContent;
     postitDiv.addEventListener("dragstart", onDragStart);
-    document.getElementById('rightCol').appendChild(postitDiv);
-}
 
-createPostit("Meat");
+    document.getElementById('rightCol').appendChild(postitDiv);
+    postitDiv.style.display = "block";
+}
