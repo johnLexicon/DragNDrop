@@ -53,6 +53,11 @@ function appendTodo(ev){
     const data = ev.dataTransfer.getData("Text");
     let liElem = document.createElement('li');
     liElem.appendChild(document.createTextNode(data));
+    let closeButton = document.createElement('a');
+    closeButton.classList.add("close");
+    closeButton.setAttribute("href", "#");
+    closeButton.addEventListener("click", removeNote);
+    liElem.appendChild(closeButton);
     todoListUl.appendChild(liElem);
 }
 
@@ -68,4 +73,9 @@ function createPostit(textContent) {
 
 function removePostit(self){
     self.parentElement.parentElement.remove();
+}
+
+function removeNote(){
+    //When using addEventListener the reference then this is the object that added the event.
+    this.parentElement.remove();
 }
