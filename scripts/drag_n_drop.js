@@ -65,3 +65,7 @@ function createPostit(textContent) {
     document.getElementById('rightCol').appendChild(postitDiv);
     postitDiv.style.display = "block";
 }
+
+function removePostit(self){
+    self.parentElement.parentElement.remove();
+}
